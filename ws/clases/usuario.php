@@ -122,9 +122,10 @@ class Usuario
 
 		$sql = "SELECT U.id, U.nombre, U.apellido, U.email, U.perfil, U.sexo
 				FROM usuarios U
-				WHERE U.email = :email AND U.password = :pass";
+				WHERE U.nombre = :nombre AND U.email = :email AND U.password = :pass";
 
 		$consulta = $conexion->prepare($sql);
+		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(":email", $usuario->email, PDO::PARAM_STR);
 		$consulta->bindValue(":pass", $usuario->password, PDO::PARAM_STR);
 		$consulta->execute();

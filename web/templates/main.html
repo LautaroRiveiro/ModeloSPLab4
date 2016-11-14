@@ -1,8 +1,9 @@
-<p style="text-align:center; background-color:lightblue;"><strong>Bienvenido, {{usuario.nombre}}</strong></p>
+<p style="text-align:center; background-color:lightblue;"><strong>Bienvenido, {{usuario.nombre}} {{usuario.apellido}} ({{usuario.email}})</strong></p>
 <ul class="nav nav-pills">
   <li role="presentation" class="active"><a ui-sref="main.menu">Home</a></li>
   <li role="presentation"><a ui-sref="main.productos">Productos</a></li>
   <li role="presentation"><a ui-sref="main.usuarios">Usuarios</a></li>
 </ul>
- 
+</br>
+
 <div ui-view></div>

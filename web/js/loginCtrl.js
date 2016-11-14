@@ -27,7 +27,6 @@ angular.module('login.controllers', [])
 	$scope.Loguear = function(){
 		//$auth.login() hace una llamada de tipo POST al $authProvider.loginUrl establecido en app.js
 		//Al combinarlo con Slim Framework es necesario configurar $app->post() y no otro.
-		$state.go("main.menu");
 		$auth.login($scope.usuario)
 		.then(function(resp){
 			if($auth.isAuthenticated()){

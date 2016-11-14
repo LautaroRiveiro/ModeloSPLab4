@@ -40,6 +40,7 @@
 			//Creo el token que voy a codificar
 			$token = array(
 			    "nombre" => $usuarioLogueado->nombre,
+			    "apellido" => $usuarioLogueado->apellido,
 			    "perfil" => $usuarioLogueado->perfil,
 			    "email" => $usuarioLogueado->email,
 			    "exp" => time()+100000
