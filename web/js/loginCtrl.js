@@ -8,8 +8,9 @@ angular.module('login.controllers', [])
 	$scope.nuevo.perfil = "Cliente";
 
 	//Valores para test:
-	$scope.usuario.email = "admin@admin.com";
-	$scope.usuario.password = "1234";
+	$scope.usuario.nombre = "";
+	$scope.usuario.email = "";
+	$scope.usuario.password = "";
 	$scope.nuevo.nombre = "Prueba";
 	$scope.nuevo.apellido = "Test";
 	$scope.nuevo.email = "@prueba.com";
@@ -26,6 +27,7 @@ angular.module('login.controllers', [])
 	$scope.Loguear = function(){
 		//$auth.login() hace una llamada de tipo POST al $authProvider.loginUrl establecido en app.js
 		//Al combinarlo con Slim Framework es necesario configurar $app->post() y no otro.
+		$state.go("main.menu");
 		$auth.login($scope.usuario)
 		.then(function(resp){
 			if($auth.isAuthenticated()){
@@ -77,4 +79,30 @@ angular.module('login.controllers', [])
 		$scope.nuevo.perfil = "Cliente";
 		$scope.estado = "login";
 	}
+
+	$scope.CargarDatos = function(tipo){
+		switch(tipo){
+			case 'COMPRADOR':
+				$scope.usuario.nombre = "Comprador";
+				$scope.usuario.email = "comprador@comprador.com";
+				$scope.usuario.password = "1234";
+				break;
+			case 'VENDEDOR':
+				$scope.usuario.nombre = "Vendedor";
+				$scope.usuario.email = "vendedor@vendedor.com";
+				$scope.usuario.password = "1234";
+				break;
+			case 'ADMINISTRADOR':
+				$scope.usuario.nombre = "Administrador";
+				$scope.usuario.email = "admin@admin.com";
+				$scope.usuario.password = "1234";
+				break;
+			default:
+				$scope.usuario.nombre = "";
+				$scope.usuario.email = "";
+				$scope.usuario.password = "";
+				break;
+		}
+
+	}	
 })

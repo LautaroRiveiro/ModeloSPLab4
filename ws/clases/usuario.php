@@ -190,7 +190,7 @@ class Usuario
 	public static function CrearConexion(){
 		try
 		{
-			$conexion = new PDO("mysql:host=localhost;dbname=pizzeria;charset=utf8;",'root','');
+			$conexion = new PDO("mysql:host=localhost;dbname=utn;charset=utf8;",'root','');
 			return $conexion;
 		}
 		catch (Exception $e) {

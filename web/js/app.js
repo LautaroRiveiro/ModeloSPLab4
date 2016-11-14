@@ -15,7 +15,18 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider){
         })
         .state('main', {
             url: '/main',
-            templateUrl: 'templates/main.html'
+            templateUrl: 'templates/main.html',
+            controller: 'mainCtrl'
+        })
+        .state('main.productos', {
+            url: '/productos',
+            templateUrl: 'templates/productos.html',
+            controller: 'productosCtrl'
+        })
+        .state('main.usuarios', {
+            url: '/usuarios',
+            templateUrl: 'templates/usuarios.html',
+            controller: 'usuariosCtrl'
         })
         .state('main.menu', {
             url: '/menu',
@@ -36,8 +47,8 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider){
 
 
     //Configuración del Satellizer
-    $authProvider.loginUrl = "TPlaboratorioIV2016/ws/auth/login";
-    $authProvider.signupUrl = "TPlaboratorioIV2016/ws/auth/signup";
+    $authProvider.loginUrl = "ModeloSPLab4/ws/auth/login";
+    $authProvider.signupUrl = "ModeloSPLab4/ws/auth/signup";
     $authProvider.tokenName = "miToken";
     $authProvider.tokenPrefix = "miApp";
     $authProvider.authHeader = 'data';
