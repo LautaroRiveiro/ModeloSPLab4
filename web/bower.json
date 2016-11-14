@@ -1,0 +1,16 @@
+{
+  "name": "FinalLabIV",
+  "authors": [
+    "Lautaro Riveiro <lautaroriveiro91@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular-ui-router": "ui-router#^0.3.1",
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "satellizer": "^0.15.5"
+  }
+}
