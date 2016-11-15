@@ -121,7 +121,23 @@
 		$response->getBody()->write(json_encode($respuesta));
 		return $response;
 	});
-	
+
+	$app->get("/productos", function($request, $response, $args){
+		$respuesta["consulta"] = "Lista de productos";
+
+		//Traigo todos los productos
+		require_once "clases/producto.php";
+		$productos = Producto::TraerTodosLosProductos();		
+		$respuesta["productos"] = $productos;
+
+		//Escribo la respuesta en el body del response y lo retorno
+		$response->getBody()->write(json_encode($respuesta));
+		return $response;
+	});
+
+
+
+
 	//Correr la aplicación
 	$app->run();
  ?>
