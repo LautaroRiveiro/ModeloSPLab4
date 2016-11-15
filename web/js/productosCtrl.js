@@ -44,7 +44,16 @@ angular.module('miApp')
 
     $scope.Eliminar = function(row){
         if(confirm("Eliminar #" + row.id + "?")){
-            console.info("Row: ", row);
+            
+            $http.delete("http://localhost/ModeloSPLab4/ws/productos/eliminar/"+row.id)
+            .then(function(data){
+                console.info("Productos: ", data);
+                //alert(data.data.mensaje);
+                location.reload();
+            }, function(error){
+                alert("Error");
+                console.info("Error: ", error);
+            });
         };
     }
 });

@@ -162,6 +162,25 @@
 		return $response;
 	});
 
+	$app->delete("/productos/eliminar/{id}", function($request, $response, $args){
+		//Recupero el Id del producto
+		$id = json_decode($args["id"]);
+
+		//Elimino el producto
+		try{
+			require_once "clases/producto.php";
+			$respuesta["cantidad"] = Producto::Eliminar($id);
+			$respuesta["mensaje"] = "Se eliminaron ".$respuesta["cantidad"]." productos";
+		}
+		catch (Exception $e){
+			$respuesta["nuevoId"] = "ERROR";
+			$respuesta["error"] = $e;
+		}
+
+		//Escribo la respuesta en el body del response y lo retorno
+		$response->getBody()->write(json_encode($respuesta));
+		return $response;
+	});
 
 	//Correr la aplicación
 	$app->run();
