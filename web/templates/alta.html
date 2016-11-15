@@ -1,0 +1,76 @@
+<form name="formAlta" class="form-horizontal" style="width: 75%" novalidate ng-submit="Cargar()">
+  <fieldset>
+    <legend>Alta Producto</legend>
+
+    <div class="form-group">
+      <label for="nombre" class="col-lg-2 control-label">Nombre</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" ng-model="producto.nombre" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="seccion" class="col-lg-2 control-label">Sección</label>
+      <div class="col-lg-10">
+        <select class="form-control" id="seccion" ng-model="producto.seccion" placeholder="Ingrese seccion" required>
+          <option>CERÁMICA</option>
+          <option>CONFECCIÓN</option>
+          <option>DEPORTES</option>
+          <option>FERRETERÍA</option>
+          <option>JUGUETERÍA</option>
+          <option>OFICINA</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="precio" class="col-lg-2 control-label">Precio</label>
+      <div class="col-lg-10">
+        <input type="number" step="0.01" min=0 class="form-control" id="precio" placeholder="Ingrese precio" ng-model="producto.precio" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pais" class="col-lg-2 control-label">País</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="pais" placeholder="Ingrese país de importación" ng-model="producto.pais" ng-disabled="estado.nacional == true" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="nacional" ng-model="estado.nacional" ng-change="Nacional()"> Industria Nacional
+          </label>
+        </div>
+      </div>
+    </div>
+
+  <!-- 
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Radios</label>
+      <div class="col-lg-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+            Option one is this
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+            Option two can be something else
+          </label>
+        </div>
+      </div>
+    </div>
+  -->
+
+    </br>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-success" ng-disabled="formAlta.$invalid">Cargar</button>
+        <button type="reset" class="btn btn-danger">Borrar</button>
+      </div>
+    </div>
+
+    <pre>{{producto | json}}</pre>
+
+  </fieldset>
+</form>

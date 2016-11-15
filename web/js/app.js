@@ -18,6 +18,11 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider){
             templateUrl: 'templates/main.html',
             controller: 'mainCtrl'
         })
+        .state('main.alta', {
+            url: '/alta',
+            templateUrl: 'templates/alta.html',
+            controller: 'altaCtrl'
+        })
         .state('main.productos', {
             url: '/productos',
             templateUrl: 'templates/productos.html',

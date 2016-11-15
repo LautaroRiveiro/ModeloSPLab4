@@ -122,6 +122,8 @@
 		return $response;
 	});
 
+#PRODUCTOS
+
 	$app->get("/productos", function($request, $response, $args){
 		$respuesta["consulta"] = "Lista de productos";
 
@@ -136,6 +138,29 @@
 	});
 
 
+	$app->post("/productos/alta/{datos}", function($request, $response, $args){
+		//Recupero los datos del formulario de alta de productos en un stdClass
+		$producto = json_decode($args["datos"]); // $datosProducto->nombre = "ArtEjemplo"
+
+		//Agrego el nuevo producto	
+		try{
+			require_once "clases/producto.php";
+			//Cargo vacío campos que por el momento no uso
+			$producto->fecha = "";
+			$producto->foto = null;
+			$respuesta["nuevoId"] = Producto::Agregar($producto);
+			$respuesta["nombre"] = $producto->nombre;
+			$respuesta["mensaje"] = "Carga correcta";
+		}
+		catch (Exception $e){
+			$respuesta["nuevoId"] = "ERROR";
+			$respuesta["error"] = $e;
+		}
+
+		//Escribo la respuesta en el body del response y lo retorno
+		$response->getBody()->write(json_encode($respuesta));
+		return $response;
+	});
 
 
 	//Correr la aplicación
