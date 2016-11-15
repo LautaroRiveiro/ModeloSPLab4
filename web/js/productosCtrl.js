@@ -3,6 +3,27 @@ angular.module('miApp')
 .controller('productosCtrl', function($scope, $http){
     // Objeto de configuracion de la grilla.
     $scope.gridOptions = {};
+    $scope.gridOptions.paginationPageSizes = [10, 50, 75];
+    $scope.gridOptions.paginationPageSize = 10;
+    //$scope.gridOptions.columnDefs.push({ field: 'company', enableSorting: false });
+    $scope.gridOptions.columnDefs = columnDefs();
+
+    console.info("Error: ", $scope.gridOptions);
+
+    function columnDefs(){
+        return [
+            { field: 'id', name: '#'},
+            { field: 'nombre'},
+            { field: 'seccion'},
+            { field: 'precio'},
+            { field: 'importado'},
+            { field: 'pais'},
+            { field: 'fecha'},
+            { field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-info btn-sm' ng-click='grid.appScope.Modificar(row.entity)'>MODIFICAR</button>"},
+            { field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-danger btn-sm' ng-click='grid.appScope.Eliminar(row.entity)'>ELIMINAR</button>"}
+        ];
+    };
+
 
     $http.get("http://localhost/ModeloSPLab4/ws/productos")
     .then(function(data){
@@ -14,4 +35,16 @@ angular.module('miApp')
     	alert("Error");
     	console.info("Error: ", error);
     })
+
+
+    $scope.Modificar = function(row){
+        alert("Va a modificar #" + row.id);
+        console.info("Row: ", row);
+    }
+
+    $scope.Eliminar = function(row){
+        if(confirm("Eliminar #" + row.id + "?")){
+            console.info("Row: ", row);
+        };
+    }
 });
