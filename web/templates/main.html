@@ -3,7 +3,7 @@
   <li role="presentation" class="active"><a ui-sref="main.menu">Home</a></li>
   <li role="presentation" ng-if="usuario.perfil != 'comprador'"><a ui-sref="main.alta">Nuevo Producto</a></li>
   <li role="presentation"><a ui-sref="main.productos">Productos</a></li>
-  <li role="presentation" ng-if="usuario.perfil != 'comprador'"><a ui-sref="main.usuarios">Usuarios</a></li>
+  <li role="presentation" ng-if="usuario.perfil == 'administrador'"><a ui-sref="main.usuarios">Usuarios</a></li>
 </ul>
 </br>
 

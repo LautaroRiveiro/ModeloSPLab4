@@ -1,7 +1,10 @@
 angular.module('miApp')
 
-.controller('productosCtrl', function($scope, $http, usuario){
+.controller('productosCtrl', function($scope, $http, usuario, $auth){
     $scope.user = usuario.usuario;
+
+    //Este parche cabeza es para evitar el error de que al refrescar, pierdo los datos en el Factory
+    $scope.user = $auth.getPayload();
 
     // Objeto de configuracion de la grilla.
     $scope.gridOptions = {};
