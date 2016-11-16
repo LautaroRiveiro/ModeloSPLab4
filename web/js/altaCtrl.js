@@ -27,6 +27,10 @@ angular.module('miApp')
 		$http.post("http://localhost/ModeloSPLab4/ws/productos/alta/"+JSON.stringify($scope.producto))
 		.then(function(data){
 			console.info("Datos: ", data);
+			alert("Carga realizada con éxito");
+			for (var campo in $scope.producto) {
+			    $scope.producto[campo] = "";
+			}
 		}, function(error){
 			console.info("Error: ", error);
 		});

@@ -1,17 +1,11 @@
 <div style="margin: 10px;margin:auto; display:block; width: 60%;">
 	</br></br>
 	
-	<button class="btn btn-primary btn-block">PRODUCTOS</button>
-	<button class="btn btn-primary btn-block" ng-if="perfil == 'administrador'">USUARIOS</button>
+	<a class="btn btn-primary btn-block" ui-sref="main.alta" ng-if="usuario.perfil != 'comprador'">NUEVO PRODUCTO</a>
+	<a class="btn btn-primary btn-block" ui-sref="main.productos">PRODUCTOS</a>
+	<a class="btn btn-primary btn-block" ui-sref="main.usuarios" ng-if="usuario.perfil == 'administrador'">USUARIOS</a>
 
 	</br>
 
-	<button class="btn btn-danger btn-block">SALIR</button>	
-
-
-	<button ng-if="perfil == 'Cliente'">VER OFERTAS</button>
-	<button ng-if="perfil == 'Cliente'">HACER RESERVA</button>
-	<button ng-if="perfil == 'Cliente'">HACER PEDIDO PARA FIESTA</button>
-
-
+	<button class="btn btn-danger btn-block" ng-click="Logout()">SALIR</button>	
 </div>

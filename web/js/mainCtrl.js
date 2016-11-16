@@ -1,7 +1,7 @@
 angular.module('miApp')
 
-.controller('mainCtrl', function($scope, $auth){
+.controller('mainCtrl', function($scope, usuario){
 	//$scope.usuario = {};
-	$scope.usuario = $auth.getPayload();
-	//$scope.usuario.nombre = "**Test**";
+	$scope.usuario = usuario.usuario;
+	console.info("Factory Usuario: ", usuario);
 });

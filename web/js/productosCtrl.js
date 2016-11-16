@@ -1,6 +1,8 @@
 angular.module('miApp')
 
-.controller('productosCtrl', function($scope, $http){
+.controller('productosCtrl', function($scope, $http, usuario){
+    $scope.user = usuario.usuario;
+
     // Objeto de configuracion de la grilla.
     $scope.gridOptions = {};
     $scope.gridOptions.paginationPageSizes = [10, 50, 75];
@@ -8,22 +10,34 @@ angular.module('miApp')
     //$scope.gridOptions.columnDefs.push({ field: 'company', enableSorting: false });
     $scope.gridOptions.columnDefs = columnDefs();
 
-    console.info("Error: ", $scope.gridOptions);
+    console.info("Grilla: ", $scope.gridOptions);
 
     function columnDefs(){
-        return [
-            { field: 'id', name: '#'},
-            { field: 'nombre'},
-            { field: 'seccion'},
-            { field: 'precio'},
-            { field: 'importado'},
-            { field: 'pais'},
-            { field: 'fecha'},
-            { field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-info btn-sm' ng-click='grid.appScope.Modificar(row.entity)'>MODIFICAR</button>"},
-            { field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-danger btn-sm' ng-click='grid.appScope.Eliminar(row.entity)'>ELIMINAR</button>"}
-        ];
+        if ($scope.user.perfil == "comprador"){
+            return [
+                { field: 'id', name: '#'},
+                { field: 'nombre'},
+                { field: 'seccion'},
+                { field: 'precio'},
+                { field: 'importado'},
+                { field: 'pais'},
+                { field: 'fecha'} //,
+                //{ field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-info btn-sm' ng-click='grid.appScope.Modificar(row.entity)'>MODIFICAR</button>"}
+            ];
+        } else{
+            return [
+                { field: 'id', name: '#'},
+                { field: 'nombre'},
+                { field: 'seccion'},
+                { field: 'precio'},
+                { field: 'importado'},
+                { field: 'pais'},
+                { field: 'fecha'},
+                //{ field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-info btn-sm' ng-click='grid.appScope.Modificar(row.entity)'>MODIFICAR</button>"},
+                { field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-danger btn-sm' ng-click='grid.appScope.Eliminar(row.entity)'>ELIMINAR</button>"}
+            ];
+        };
     };
-
 
     $http.get("http://localhost/ModeloSPLab4/ws/productos")
     .then(function(data){

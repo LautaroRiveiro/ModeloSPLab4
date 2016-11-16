@@ -1,9 +1,12 @@
 angular.module('miApp')
 
-.controller('menuCtrl', function($scope, $auth){
-	$scope.perfil = "";
-	var perfil = $auth.getPayload();
-	$scope.perfil = perfil.perfil;
-	console.info(perfil);
-	console.info($scope.perfil);
+.controller('menuCtrl', function($scope, usuario, $state){
+	$scope.usuario = usuario.usuario;
+
+	$scope.Logout = function(){
+		usuario.Salir();
+	//	$state.go("login");
+	}
+
+	
 });

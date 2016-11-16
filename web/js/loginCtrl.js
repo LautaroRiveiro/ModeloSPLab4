@@ -1,6 +1,6 @@
 angular.module('login.controllers', [])
 
-.controller('loginCtrl', function($scope, $auth, $location, $http, $state){
+.controller('loginCtrl', function($scope, $auth, $location, $http, $state, usuario){
 	
 	$scope.estado = "login";
 	$scope.usuario = {};
@@ -24,6 +24,11 @@ angular.module('login.controllers', [])
      * Si la conexión fue exitosa (no importa si el log existe), se ejecuta la función success del then(), donde recién ahí evalúo si existe o no el usuario y la clave.
      * Si hubo algún error en la conexión, se ejecuta la función de error del then(), donde muestro por consola el error.
     */
+
+/*  $scope.Loguear = function(){
+  usuario.Loguear($scope.usuario);
+}*/
+   
 	$scope.Loguear = function(){
 		//$auth.login() hace una llamada de tipo POST al $authProvider.loginUrl establecido en app.js
 		//Al combinarlo con Slim Framework es necesario configurar $app->post() y no otro.
@@ -32,6 +37,8 @@ angular.module('login.controllers', [])
 			if($auth.isAuthenticated()){
 				console.info("response: ", resp);
 				console.info("getPayload: ", $auth.getPayload());
+				//usuario.setUsuario($auth.getPayload());
+				usuario.usuario = $auth.getPayload();
 				$state.go("main.menu");
 			}
 			else{
@@ -51,9 +58,7 @@ angular.module('login.controllers', [])
 		//$auth.removeToken();
 		//console.info("isAuthenticated: ", $auth.isAuthenticated());
 
-
-
-      $auth.signup($scope.nuevo)
+      	$auth.signup($scope.nuevo)
         .then(function(response) {
           console.info("Ok", response);
           console.info("Nuevo usuario: ", $auth.getPayload());
@@ -63,9 +68,6 @@ angular.module('login.controllers', [])
 			//Error durante registración
 			console.info("Error de conexión", error);
         });
-
-
-
 	}
 
 	$scope.Registrarse = function(){

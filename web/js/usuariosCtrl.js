@@ -1,8 +1,9 @@
 angular.module('miApp')
 
-.controller('usuariosCtrl', function($scope, $http){
+.controller('usuariosCtrl', function($scope, $http, usuario){
 
 	$scope.estado = {};
+	$scope.user = usuario.usuario;
 
 	$http.get("http://localhost/ModeloSPLab4/ws/usuarios")
 	.then(function(data){
