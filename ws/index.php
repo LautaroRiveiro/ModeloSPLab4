@@ -182,6 +182,60 @@
 		return $response;
 	});
 
+#USUARIOS
+	$app->get("/usuarios", function($request, $response, $args){
+
+		$respuesta["consulta"] = "Lista de usuarios";
+
+		//Traigo todos los usuarios
+		require_once "clases/usuario.php";
+		$usuarios = Usuario::TraerTodosLosUsuarios();		
+		$respuesta["usuarios"] = $usuarios;
+
+		//Escribo la respuesta en el body del response y lo retorno
+		$response->getBody()->write(json_encode($respuesta));
+		return $response;		
+	});
+
+	$app->delete("/usuarios/{id}", function($request, $response, $args){
+		//Recupero el Id del usuario
+		$id = json_decode($args["id"]);
+
+		//Elimino el usuario
+		try{
+			require_once "clases/usuario.php";
+			$respuesta["cantidad"] = Usuario::Eliminar($id);
+			$respuesta["mensaje"] = "Se eliminaron ".$respuesta["cantidad"]." usuarios";
+		}
+		catch (Exception $e){
+			$respuesta["nuevoId"] = "ERROR";
+			$respuesta["error"] = $e;
+		}
+
+		//Escribo la respuesta en el body del response y lo retorno
+		$response->getBody()->write(json_encode($respuesta));
+		return $response;
+	});
+
+	$app->put("/usuarios/{usuario}", function($request, $response, $args){
+		//Recupero los datos del formulario de modificación del usuario en un stdClass
+		$usuario = json_decode($args["usuario"]); // $usuario->nombre = "Lautaro"
+
+		//Modifico el usuario
+		try{
+			require_once "clases/usuario.php";
+			$respuesta["cantidad"] = Usuario::Modificar($usuario);
+			$respuesta["mensaje"] = "Se modificaron ".$respuesta["cantidad"]." usuarios";
+		}
+		catch (Exception $e){
+			$respuesta["nuevoId"] = "ERROR";
+			$respuesta["error"] = $e;
+		}
+
+		//Escribo la respuesta en el body del response y lo retorno
+		$response->getBody()->write(json_encode($respuesta));
+		return $response;
+	});
 	//Correr la aplicación
 	$app->run();
  ?>

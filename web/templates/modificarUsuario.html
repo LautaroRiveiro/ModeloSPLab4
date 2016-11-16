@@ -1,0 +1,67 @@
+<div align="center">
+<form name="form" class="form-horizontal form-inline" novalidate ng-submit="Registrar()">
+  <fieldset>
+
+    <div class="form-group">
+      <label for="nombre" class="col-lg-2 control-label">Nombre</label>      
+      <div class="col-lg-10">
+        <input type="text" class="form-control input-sm" id="nombre" placeholder="Ingrese nombre" ng-model="usuario.nombre" required>
+      </div>
+    </div>
+
+    <div class="form-group form-inline">
+      <label for="apellido" class="col-lg-2 control-label">Apellido</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control input-sm" id="apellido" placeholder="Ingrese Apellido" ng-model="usuario.apellido" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="col-lg-2 control-label">E-mail</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control input-sm" id="email" placeholder="Ingrese E-mail" ng-model="usuario.email" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="perfil" class="col-lg-2 control-label">Perfil</label>
+      <div class="col-lg-10">
+        <select class="form-control input-sm" id="perfil" ng-model="usuario.perfil" required>
+          <option>administrador</option>
+          <option>comprador</option>
+          <option>vendedor</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Sexo</label>
+      <div class="col-lg-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="sexo" id="masculino" value="Masculino" ng-model="usuario.sexo" checked="">
+            Masculino
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="sexo" id="femenino" value="Femenino" ng-model="usuario.sexo">
+            Femenino
+          </label>
+        </div>
+      </div>
+    </div>
+
+    </br>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-success btn-sm" ng-click="Aceptar(usuario)">ACEPTAR</button>
+        <button type="button" class="btn btn-danger btn-sm" ng-click="Cancelar()">CANCELAR</button>
+      </div>
+    </div>
+
+    <!-- <pre>{{usuario | json}}</pre> -->
+
+  </fieldset>
+</form>
+</div>

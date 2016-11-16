@@ -1,3 +1,13 @@
-<table>
-	<li>ghuusaerios</li>
+<legend>Usuarios</legend>
+<table align="center">
+	<tr>
+		<th ng-repeat="(key, value) in usuarios[0]" ng-if="key != 'password'">{{key}}</th>
+	</tr>
+	<tr ng-repeat="usuario in usuarios"> 
+		<td ng-repeat="(key, value) in usuario" style="width: auto;">{{value}} &emsp;</td>
+		<td><button class="btn btn-info btn-xs" ng-click="Modificar(usuario)">EDITAR</button>&emsp;</td>
+		<td><button class="btn btn-danger btn-xs" ng-click="Eliminar(usuario.id)">ELIMINAR</button>&emsp;</td>
+	</tr>	
 </table>
+
+<modificar-usuario ng-if="estado.habilitarEdicion"></modificar-usuario>
