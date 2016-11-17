@@ -1,4 +1,4 @@
-var app = angular.module("miApp", ['ui.router', 'satellizer', 'ui.grid', 'ui.grid.pagination', 'encuesta.controller', 'login.controllers']);
+var app = angular.module("miApp", ['ui.router', 'satellizer', 'ui.grid', 'ui.grid.pagination', 'ui.grid.selection', 'encuesta.controller', 'login.controllers']);
 
 app.config(function($stateProvider, $urlRouterProvider, $authProvider){
 	

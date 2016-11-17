@@ -1,9 +1,22 @@
 <legend>Usuarios</legend>
+
+
 <table align="center">
 	<tr>
-		<th ng-repeat="(key, value) in usuarios[0]" ng-if="key != 'password'">{{key}}</th>
+		<td colspan="100%">
+			<label>Filtrar por Perfil:</label>
+			<select ng-model="buscar.perfil" style="color:black;">
+				<option value="">Todos</option>
+				<option value="administrador">Administradores</option>
+				<option value="comprador">Compradores</option>
+				<option value="vendedor">Vendedores</option>
+			</select>
+		</td>
 	</tr>
-	<tr ng-repeat="usuario in usuarios"> 
+	<tr>
+		<th ng-repeat="(key, value) in usuarios[0]" ng-if="key != 'password'">{{key | uppercase}}</th>
+	</tr>
+	<tr ng-repeat="usuario in usuarios | filter:buscar:strict">
 		<td ng-repeat="(key, value) in usuario" style="width: auto;">{{value}} &emsp;</td>
 		<td><button class="btn btn-info btn-xs" ng-click="Modificar(usuario)">EDITAR</button>&emsp;</td>
 		<td><button class="btn btn-danger btn-xs" ng-click="Eliminar(usuario.id)">ELIMINAR</button>&emsp;</td>

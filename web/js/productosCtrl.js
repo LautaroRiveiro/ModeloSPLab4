@@ -1,6 +1,6 @@
 angular.module('miApp')
 
-.controller('productosCtrl', function($scope, $http, usuario, $auth){
+.controller('productosCtrl', function($scope, $http, usuario, $auth, uiGridConstants){
     $scope.user = usuario.usuario;
 
     //Este parche cabeza es para evitar el error de que al refrescar, pierdo los datos en el Factory
@@ -12,15 +12,34 @@ angular.module('miApp')
     $scope.gridOptions.paginationPageSize = 10;
     //$scope.gridOptions.columnDefs.push({ field: 'company', enableSorting: false });
     $scope.gridOptions.columnDefs = columnDefs();
+    $scope.gridOptions.enableFiltering = true;
 
     console.info("Grilla: ", $scope.gridOptions);
-
+    console.log(uiGridConstants);
     function columnDefs(){
         if ($scope.user.perfil == "comprador"){
             return [
                 { field: 'id', name: '#'},
-                { field: 'nombre'},
-                { field: 'seccion'},
+                { field: 'nombre',
+                    filter:{
+                        condition: uiGridConstants.filter.STARTS_WITH,
+                        placeholder: 'Comienza...'
+                    }
+                },
+                { field: 'seccion',
+                    filter: {
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: [
+                            {value: 'CERÁMICA', label: 'CERÁMICA'},
+                            {value: 'CONFECCIÓN', label: 'CONFECCIÓN'},
+                            {value: 'DEPORTES', label: 'DEPORTES'},
+                            {value: 'FERRETERÍA', label: 'FERRETERÍA'},
+                            {value: 'JUGUETERÍA', label: 'JUGUETERÍA'},
+                            {value: 'OFICINA', label: 'OFICINA'}
+                        ]
+                    },
+                    //cellFilter: 'seccion'
+                },
                 { field: 'precio'},
                 { field: 'importado'},
                 { field: 'pais'},
@@ -29,15 +48,33 @@ angular.module('miApp')
             ];
         } else{
             return [
-                { field: 'id', name: '#'},
-                { field: 'nombre'},
-                { field: 'seccion'},
+                { field: 'id', name: '#', width: '30', enableFiltering: false},
+                { field: 'nombre', width: "*",
+                    filter:{
+                        condition: uiGridConstants.filter.STARTS_WITH,
+                        placeholder: 'Comienza...'
+                    }
+                },
+                { field: 'seccion',
+                    filter: {
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: [
+                            {value: 'CERÁMICA', label: 'CERÁMICA'},
+                            {value: 'CONFECCIÓN', label: 'CONFECCIÓN'},
+                            {value: 'DEPORTES', label: 'DEPORTES'},
+                            {value: 'FERRETERÍA', label: 'FERRETERÍA'},
+                            {value: 'JUGUETERÍA', label: 'JUGUETERÍA'},
+                            {value: 'OFICINA', label: 'OFICINA'}
+                        ]
+                    },
+                    //cellFilter: 'seccion'
+                },
                 { field: 'precio'},
                 { field: 'importado'},
                 { field: 'pais'},
                 { field: 'fecha'},
                 //{ field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-info btn-sm' ng-click='grid.appScope.Modificar(row.entity)'>MODIFICAR</button>"},
-                { field: 'Boton', displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-danger btn-sm' ng-click='grid.appScope.Eliminar(row.entity)'>ELIMINAR</button>"}
+                { field: 'Boton', enableFiltering: false, displayName: 'Boton', width: '100', cellTemplate:"<button class='btn btn-danger btn-sm' ng-click='grid.appScope.Eliminar(row.entity)'>ELIMINAR</button>"}
             ];
         };
     };
